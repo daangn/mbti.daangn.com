@@ -35,10 +35,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 };
 
 exports.onPostBuild = async ({ store, reporter }) => {
-  // if (process.env.GATSBY_CLOUD === 'true') {
-  //   // Note: Gatsby Cloud 에서는 Puppeteer를 못돌린다 이런;;
-  //   return
-  // }
+  if (process.env.GATSBY_CLOUD === "true") {
+    // Note: Gatsby Cloud 에서는 Puppeteer를 못돌린다 이런;;
+    return;
+  }
 
   const state = store.getState();
   const baseDir = state.program.directory;
