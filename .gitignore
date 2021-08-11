@@ -1,0 +1,10 @@
+node_modules/
+public/
+.cache/
+dist/
+src/__generated__/
+
+.env
+
+.DS_Store
+*.log
