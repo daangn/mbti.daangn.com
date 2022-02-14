@@ -23,5 +23,24 @@
         "label" : "공유하기 이미지"
       }
     }
+  },
+  "Result" : {
+    "cta_link" : {
+      "type" : "Link",
+      "config" : {
+        "label" : "CTA Link",
+        "placeholder" : "\"이웃 만나러 가기\" 링크",
+        "select" : null
+      }
+    }
+  },
+  "Meta" : {
+    "fb_app_id" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "FB App ID",
+        "placeholder" : "Facebook App ID"
+      }
+    }
   }
 }

@@ -27,11 +27,15 @@ const checkIsMobileSafari = async () => {
 }
 
 const MBTITargetResultPage = ({
-  data: { prismicMbtiTestResult },
+  data: { prismicMbtiTestResult, prismicMbtiIntro },
   params: { uid: code },
 }: PageProps<GatsbyTypes.MBTITargetResultPageQuery>) => {
   if (!prismicMbtiTestResult?.data) {
     throw new Error('There is no mbtiTargetResult')
+  }
+
+  if (!prismicMbtiIntro?.data?.cta_link?.url) {
+    throw new Error('CTA Link should be set');
   }
 
   useOpenApp()
@@ -60,10 +64,6 @@ const MBTITargetResultPage = ({
     }
   }, [code])
 
-  const handleClickMeet = () => {
-    location.href = 'https://daangn.onelink.me/oWdR/75984c3'
-  }
-
   const data = useSiteMeta()
   const url = `${data.site?.siteMetadata.siteUrl}/results/${code}`
   return (
@@ -88,9 +88,9 @@ const MBTITargetResultPage = ({
       />
       <ButtonsWrapper>
         <ButtonWrapper>
-          <KarrotButton id="visit-karrot" onClick={handleClickMeet}>
+          <KarrotLink id="visit-karrot" to={prismicMbtiIntro.data.cta_link.url}>
             이웃 만나러 가기
-          </KarrotButton>
+          </KarrotLink>
         </ButtonWrapper>
 
         <ButtonWrapper>
@@ -172,6 +172,8 @@ const KarrotButton = styled(OutlineWhiteButton)`
   color: ${({ theme }) => theme.colors.$carrot500};
 `
 
+const KarrotLink = KarrotButton.withComponent(Link);
+
 const ButtonWrapper = styled.div`
   margin: 0 0 1rem;
 `
@@ -239,6 +241,15 @@ const DownloadIconImage = styled.img`
 
 export const query = graphql`
   query MBTITargetResultPage($uid: String!) {
+    prismicMbtiIntro(
+      lang: { eq: "ko-kr" }
+    ) {
+      data {
+        cta_link {
+          url
+        }
+      }
+    }
     prismicMbtiTestResult(
       lang: { eq: "ko-kr" }
       uid: { eq: $uid }
