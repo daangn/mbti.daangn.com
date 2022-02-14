@@ -164,7 +164,8 @@ const IllustWrapper = styled(ImageWrapper)`
 export const query = graphql`
   query MBTIIntroPage {
     prismicMbtiIntro(
-      lang: { eq: "ko-kr" }
+      # Note: [WMAS-7]
+      lang: { eq: "en-ca" }
     ) {
       ...Layout_data
       data {

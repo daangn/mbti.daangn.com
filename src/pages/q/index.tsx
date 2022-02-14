@@ -306,12 +306,14 @@ const NumberAssetWraper = styled.span`
 export const query = graphql`
   query MBTIQuestionPage {
     prismicMbtiIntro(
-      lang: { eq: "ko-kr" }
+      # Note: [WMAS-7]
+      lang: { eq: "en-ca" }
     ) {
       ...Layout_data
     }
     prismicMbtiTestQuestion(
-      lang: { eq: "ko-kr" }
+      # Note: [WMAS-7]
+      lang: { eq: "en-ca" }
     ) {
       data {
         body {

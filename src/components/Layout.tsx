@@ -26,12 +26,12 @@ const Layout: React.FC<LayoutProps> = ({ data, children }) => {
           type: 'website',
           site_name: staticData.site?.siteMetadata.siteName,
           url: staticData.site?.siteMetadata.siteUrl,
-          locale: 'ko_kr',
+          locale: 'ko-CA',
         }}
         facebook={data?.data?.fb_app_id != null ? ({
           appId: data.data.fb_app_id,
         }) : undefined}
-        language="ko"
+        language="ko-CA"
         canonical={staticData.site?.siteMetadata.siteUrl}
         twitter={{ cardType: 'summary_large_image', handle: '@daangnteam' }}
       />

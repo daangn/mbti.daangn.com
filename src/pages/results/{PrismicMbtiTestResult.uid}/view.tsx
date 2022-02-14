@@ -34,7 +34,8 @@ const MBTITargetResultViewPage = ({
 export const query = graphql`
   query MBTITargetResultViewPage($uid: String!) {
     prismicMbtiTestResult(
-      lang: { eq: "ko-kr" }
+      # Note: [WMAS-7]
+      lang: { eq: "en-ca" }
       uid: { eq: $uid }
     ) {
       id

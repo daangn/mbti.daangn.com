@@ -4,7 +4,8 @@ require("dotenv-safe").config({
 });
 
 const siteMetadata = {
-  siteUrl: "https://mbti.daangn.com",
+  // Note: [WMAS-7]
+  siteUrl: "https://mbti-ko.ca.karrotmarket.com",
   siteName: "성격으로 알아보는 당신의 씀씀이 테스트",
   shortName: "당신의 씀씀이 테스트",
 };
@@ -40,7 +41,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-google-tagmanager",
       options: {
-        id: "GTM-P5P3KT9",
+        id: "GTM-M8N8VPG",
         includeDevelopment: false,
         defaultDataLayer: { platform: "gatsby" },
         routeChangeEventName: "gatsby-route-change",

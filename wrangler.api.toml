@@ -1,0 +1,17 @@
+name = 'mbti-test-ca-ko-api'
+type = 'javascript'
+account_id = 'aad5c82543cd1f267b89737d0f56405e'
+workers_dev = true
+
+[[kv_namespaces]]
+binding = 'MBTI_TEST'
+id = '795351e167bc459c9bf295eadfa365d7'
+preview_id = '1b4104b5f6834fafb0fe85b99e64e026'
+
+[build]
+command = """
+  yarn esbuild src/worker/index.ts --bundle --outfile=dist/worker.js --format=esm
+"""
+
+[build.upload]
+format = 'service-worker'

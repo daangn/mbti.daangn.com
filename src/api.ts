@@ -1,7 +1,8 @@
 import axios from 'axios'
 
+// Note: [WMAS-7]
 const mbtiTestWorker = axios.create({
-  baseURL: 'https://mbti-test.karrot.workers.dev',
+  baseURL: 'https://mbti-test-ca-ko-api.karrot.workers.dev',
 })
 
 export const getParticipantCount = async () => {

@@ -4,7 +4,7 @@
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
 const path = require("path");
-const { promises: fs, existsSync } = require("fs");
+const fs = require("fs/promises");
 
 const buildPageImage = require("./scripts/buildPageImages");
 
@@ -44,21 +44,18 @@ exports.onPostBuild = async ({ store, reporter }) => {
   const baseDir = state.program.directory;
   const publicDir = path.join(baseDir, "public");
   const resultDir = path.join(publicDir, "results");
-  const resultNames = (await fs.readdir(resultDir)).filter(
-    (name) => !name.startsWith(".")
-  );
+
+  // Note: [WMAS-7]
+  const resultNames = (await fs.readdir(resultDir))
+    .filter(name => !name.startsWith("."))
+    .filter(name => !name.endsWith(".jpeg"));
 
   if (resultNames.length === 0) {
     return;
   }
 
-  const imageBuildDir = path.join(baseDir, "tmp");
-
-  const isExistImageDir = existsSync(imageBuildDir);
-  !isExistImageDir && (await fs.mkdir(imageBuildDir));
-
   await buildPageImage({
-    getPath: (name) => path.join(imageBuildDir, `${name}.jpeg`),
+    getPath: (name) => path.join(resultDir, `${name}.jpeg`),
     resultNames,
     publicDir,
     reporter,

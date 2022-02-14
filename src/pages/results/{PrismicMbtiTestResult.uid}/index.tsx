@@ -243,7 +243,8 @@ const DownloadIconImage = styled.img`
 export const query = graphql`
   query MBTITargetResultPage($uid: String!) {
     prismicMbtiIntro(
-      lang: { eq: "ko-kr" }
+      # Note: [WMAS-7]
+      lang: { eq: "en-ca" }
     ) {
       ...Layout_data
 
@@ -254,7 +255,8 @@ export const query = graphql`
       }
     }
     prismicMbtiTestResult(
-      lang: { eq: "ko-kr" }
+      # Note: [WMAS-7]
+      lang: { eq: "en-ca" }
       uid: { eq: $uid }
     ) {
       id

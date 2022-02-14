@@ -1,6 +1,8 @@
 import { bridge } from '@src/bridge'
 
-export const GATSBY_CLOUDFRONT_DOMAIN = process.env.GATSBY_CLOUDFRONT_DOMAIN
+// FIXME: 이게 왜 DOMAIN 임... 변수 명이라도 바꿔
+// Note: [WMAS-7]
+export const GATSBY_CLOUDFRONT_DOMAIN = '/results';
 
 // https://github.com/daangn/webview/blob/develop/bridge-modern/src/core/Driver.ts#L33
 export const IS_CUPERTINO =
