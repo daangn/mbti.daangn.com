@@ -27,8 +27,9 @@ const MBTIIntroPage: React.FC<PageProps<GatsbyTypes.MBTIIntroPageQuery>> = ({ da
   const handleClickStart = () => {
     dispatch({ type: 'req_post' })
   }
+
   return (
-    <Layout>
+    <Layout data={prismicMbtiIntro}>
       <Global
         styles={css`
           html {
@@ -165,6 +166,7 @@ export const query = graphql`
     prismicMbtiIntro(
       lang: { eq: "ko-kr" }
     ) {
+      ...Layout_data
       data {
         title
         description

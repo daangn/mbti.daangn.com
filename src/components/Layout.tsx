@@ -1,33 +1,38 @@
 import * as React from 'react'
+import { graphql } from 'gatsby';
 import { GatsbySeo } from 'gatsby-plugin-next-seo'
 import { Helmet } from 'react-helmet-async'
 
 import { useSiteMeta } from '@src/hooks/useSiteMeta'
 
-const Layout: React.FC = ({ children }) => {
-  const data = useSiteMeta()
+type LayoutProps = {
+  data?: GatsbyTypes.Layout_dataFragment,
+};
+
+const Layout: React.FC<LayoutProps> = ({ data, children }) => {
+  const staticData = useSiteMeta()
 
   return (
     <>
       <GatsbySeo
-        title={data.site?.siteMetadata.siteName}
+        title={staticData.site?.siteMetadata.siteName}
         metaTags={[
           {
             name: 'description',
-            content: data.site?.siteMetadata.siteName,
+            content: staticData.site?.siteMetadata.siteName,
           },
         ]}
         openGraph={{
           type: 'website',
-          site_name: data.site?.siteMetadata.siteName,
-          url: data.site?.siteMetadata.siteUrl,
+          site_name: staticData.site?.siteMetadata.siteName,
+          url: staticData.site?.siteMetadata.siteUrl,
           locale: 'ko_kr',
         }}
-        facebook={{
-          appId: '198230258800515',
-        }}
+        facebook={data.data?.fb_app_id != null ? ({
+          appId: data.data.fb_app_id,
+        }) : undefined}
         language="ko"
-        canonical={data.site?.siteMetadata.siteUrl}
+        canonical={staticData.site?.siteMetadata.siteUrl}
         twitter={{ cardType: 'summary_large_image', handle: '@daangnteam' }}
       />
       <Helmet>
@@ -41,5 +46,13 @@ const Layout: React.FC = ({ children }) => {
     </>
   )
 }
+
+export const fragments = graphql`
+  fragment Layout_data on PrismicMbtiIntro {
+    data {
+      fb_app_id
+    }
+  }
+`;
 
 export default Layout

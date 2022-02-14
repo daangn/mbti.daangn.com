@@ -6,7 +6,6 @@ import debounce from 'lodash.debounce'
 import { graphql } from 'gatsby'
 import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 
-import Layout from '@src/components/Layout'
 import { Base } from '@src/styles'
 import Navbar, { NavbarRef } from '@src/components/Navbar'
 import { bridge } from '@src/bridge'
@@ -62,7 +61,7 @@ const ResultPageView: React.FC<Props> = ({ data, children, preview }) => {
     : null
 
   return (
-    <Layout>
+    <>
       <Container id="daangn-mbti-result-page-container">
         {preview ? (
           <Margin />
@@ -124,7 +123,7 @@ const ResultPageView: React.FC<Props> = ({ data, children, preview }) => {
           }
         `}
       />
-    </Layout>
+    </>
   )
 }
 

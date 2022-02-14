@@ -30,7 +30,7 @@ import AnswerItem from '@src/components/AnswerItem'
 
 const Numbers = [Num1, Num2, Num3, Num4, Num5, Num6, Num7, Num8, Num9, Num10, Num11, Num12]
 
-function MBTIQuestionPage({ data: { prismicMbtiTestQuestion } }: PageProps<GatsbyTypes.MBTIQuestionPageQuery>) {
+function MBTIQuestionPage({ data: { prismicMbtiTestQuestion, prismicMbtiIntro } }: PageProps<GatsbyTypes.MBTIQuestionPageQuery>) {
   const theme = useTheme()
 
   const { idx, push } = useQuestionNumberWithRoute()
@@ -91,7 +91,7 @@ function MBTIQuestionPage({ data: { prismicMbtiTestQuestion } }: PageProps<Gatsb
   return (
     <>
       {visible && currentQuestionBody ? (
-        <Layout>
+        <Layout data={prismicMbtiIntro}>
           {!showAnalysis && (
             <Base>
               <Navbar
@@ -305,6 +305,11 @@ const NumberAssetWraper = styled.span`
 
 export const query = graphql`
   query MBTIQuestionPage {
+    prismicMbtiIntro(
+      lang: { eq: "ko-kr" }
+    ) {
+      ...Layout_data
+    }
     prismicMbtiTestQuestion(
       lang: { eq: "ko-kr" }
     ) {

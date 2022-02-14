@@ -6,6 +6,7 @@ import { getAccurateAgent } from '@egjs/agent'
 import { withPreview } from 'gatsby-source-prismic'
 import { GatsbySeo } from 'gatsby-plugin-next-seo'
 
+import Layout from '@src/components/Layout'
 import { clickAfterDimm } from '@src/styles'
 import { MBTI_RESULT_LOCALSTORAGE_KEY } from '@src/constants/mbti'
 import { useShare } from '@src/hooks/useShare'
@@ -67,65 +68,67 @@ const MBTITargetResultPage = ({
   const data = useSiteMeta()
   const url = `${data.site?.siteMetadata.siteUrl}/results/${code}`
   return (
-    <ResultPageView data={prismicMbtiTestResult.data}>
-      <GatsbySeo
-        title={prismicMbtiTestResult.data.summary}
-        description={prismicMbtiTestResult.data.og_description}
-        openGraph={{
-          images: prismicMbtiTestResult.data.opengraph_image
-            ? [
-                {
-                  ...prismicMbtiTestResult.data.opengraph_image.dimensions,
-                  url: prismicMbtiTestResult.data.opengraph_image.url!,
-                },
-              ]
-            : [],
-          title: prismicMbtiTestResult.data.summary,
-          description: prismicMbtiTestResult.data.og_description,
-          url,
-        }}
-        canonical={url}
-      />
-      <ButtonsWrapper>
-        <ButtonWrapper>
-          <KarrotLink id="visit-karrot" to={prismicMbtiIntro.data.cta_link.url}>
-            이웃 만나러 가기
-          </KarrotLink>
-        </ButtonWrapper>
+    <Layout data={prismicMbtiIntro}>
+      <ResultPageView data={prismicMbtiTestResult.data}>
+        <GatsbySeo
+          title={prismicMbtiTestResult.data.summary}
+          description={prismicMbtiTestResult.data.og_description}
+          openGraph={{
+            images: prismicMbtiTestResult.data.opengraph_image
+              ? [
+                  {
+                    ...prismicMbtiTestResult.data.opengraph_image.dimensions,
+                    url: prismicMbtiTestResult.data.opengraph_image.url!,
+                  },
+                ]
+              : [],
+            title: prismicMbtiTestResult.data.summary,
+            description: prismicMbtiTestResult.data.og_description,
+            url,
+          }}
+          canonical={url}
+        />
+        <ButtonsWrapper>
+          <ButtonWrapper>
+            <KarrotLink id="visit-karrot" to={prismicMbtiIntro.data.cta_link.url}>
+              이웃 만나러 가기
+            </KarrotLink>
+          </ButtonWrapper>
 
-        <ButtonWrapper>
-          <OutlineWhiteButton id="download-result" onClick={handleClickDownload}>
-            결과 이미지 저장하기
-          </OutlineWhiteButton>
-        </ButtonWrapper>
+          <ButtonWrapper>
+            <OutlineWhiteButton id="download-result" onClick={handleClickDownload}>
+              결과 이미지 저장하기
+            </OutlineWhiteButton>
+          </ButtonWrapper>
 
-        <RetryButtonWrapper>
-          <Link id="restart-test" to="/" onClick={handleClickRetryButton} className="mbti-test-retry-button">
-            테스트 다시하기
-          </Link>
-        </RetryButtonWrapper>
-      </ButtonsWrapper>
+          <RetryButtonWrapper>
+            <Link id="restart-test" to="/" onClick={handleClickRetryButton} className="mbti-test-retry-button">
+              테스트 다시하기
+            </Link>
+          </RetryButtonWrapper>
+        </ButtonsWrapper>
 
-      <Portal>
-        <DownloadButton id="share-result" onClick={handleClickShare}>
-          나의 유형 결과 공유하기
-        </DownloadButton>
-      </Portal>
+        <Portal>
+          <DownloadButton id="share-result" onClick={handleClickShare}>
+            나의 유형 결과 공유하기
+          </DownloadButton>
+        </Portal>
 
-      <Modal
-        open={!!image}
-        onClose={() => {
-          setImage(null)
-        }}>
-        <div>
-          <DownloadImageGuideMessage>
-            <DownloadIconImage src={DownloadIc} />
-            <span>아래 이미지를 꾹 눌러 저장하세요</span>
-          </DownloadImageGuideMessage>
-          {image && <DownloadImage src={image} />}
-        </div>
-      </Modal>
-    </ResultPageView>
+        <Modal
+          open={!!image}
+          onClose={() => {
+            setImage(null)
+          }}>
+          <div>
+            <DownloadImageGuideMessage>
+              <DownloadIconImage src={DownloadIc} />
+              <span>아래 이미지를 꾹 눌러 저장하세요</span>
+            </DownloadImageGuideMessage>
+            {image && <DownloadImage src={image} />}
+          </div>
+        </Modal>
+      </ResultPageView>
+    </Layout>
   )
 }
 
@@ -244,6 +247,8 @@ export const query = graphql`
     prismicMbtiIntro(
       lang: { eq: "ko-kr" }
     ) {
+      ...Layout_data
+
       data {
         cta_link {
           url
