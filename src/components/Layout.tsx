@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ data, children }) => {
           url: staticData.site?.siteMetadata.siteUrl,
           locale: 'ko_kr',
         }}
-        facebook={data.data?.fb_app_id != null ? ({
+        facebook={data?.data?.fb_app_id != null ? ({
           appId: data.data.fb_app_id,
         }) : undefined}
         language="ko"
