@@ -162,7 +162,7 @@ const IllustWrapper = styled(ImageWrapper)`
 
 export const query = graphql`
   query MBTIIntroPage {
-    prismicMbtiIntro {
+    prismicMbtiIntro(lang: { eq: "ko-kr" }) {
       data {
         title
         description

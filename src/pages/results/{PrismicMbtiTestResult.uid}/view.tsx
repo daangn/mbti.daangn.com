@@ -33,7 +33,10 @@ const MBTITargetResultViewPage = ({
 
 export const query = graphql`
   query MBTITargetResultViewPage($uid: String!) {
-    prismicMbtiTestResult(uid: { eq: $uid }) {
+    prismicMbtiTestResult(
+      lang: { eq: "ko-kr" }
+      uid: { eq: $uid }
+    ) {
       id
       uid
       data {

@@ -305,7 +305,9 @@ const NumberAssetWraper = styled.span`
 
 export const query = graphql`
   query MBTIQuestionPage {
-    prismicMbtiTestQuestion {
+    prismicMbtiTestQuestion(
+      lang: { eq: "ko-kr" }
+    ) {
       data {
         body {
           __typename

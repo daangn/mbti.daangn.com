@@ -16,7 +16,6 @@ import ResultPageView from '@src/components/ResultPage'
 import { useOpenApp } from '@src/hooks/useOpenApp'
 import { GATSBY_CLOUDFRONT_DOMAIN, IS_ANDROID } from '@src/constants/env'
 import { useSiteMeta } from '@src/hooks/useSiteMeta'
-import { bridge } from '@src/bridge'
 
 const checkIsMobileSafari = async () => {
   const agent = await getAccurateAgent()
@@ -240,7 +239,10 @@ const DownloadIconImage = styled.img`
 
 export const query = graphql`
   query MBTITargetResultPage($uid: String!) {
-    prismicMbtiTestResult(uid: { eq: $uid }) {
+    prismicMbtiTestResult(
+      lang: { eq: "ko-kr" }
+      uid: { eq: $uid }
+    ) {
       id
       uid
       data {
