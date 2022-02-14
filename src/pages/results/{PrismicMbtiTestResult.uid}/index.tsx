@@ -35,10 +35,6 @@ const MBTITargetResultPage = ({
     throw new Error('There is no mbtiTargetResult')
   }
 
-  if (!prismicMbtiIntro?.data?.cta_link?.url) {
-    throw new Error('CTA Link should be set');
-  }
-
   useOpenApp()
 
   const handleClickRetryButton = () => {
@@ -89,11 +85,13 @@ const MBTITargetResultPage = ({
           canonical={url}
         />
         <ButtonsWrapper>
-          <ButtonWrapper>
-            <KarrotLink id="visit-karrot" to={prismicMbtiIntro.data.cta_link.url}>
-              이웃 만나러 가기
-            </KarrotLink>
-          </ButtonWrapper>
+          {prismicMbtiIntro?.data?.cta_link?.url && (
+            <ButtonWrapper>
+              <KarrotLink id="visit-karrot" to={prismicMbtiIntro.data.cta_link.url}>
+                이웃 만나러 가기
+              </KarrotLink>
+            </ButtonWrapper>
+          )}
 
           <ButtonWrapper>
             <OutlineWhiteButton id="download-result" onClick={handleClickDownload}>
