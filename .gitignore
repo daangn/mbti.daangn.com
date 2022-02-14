@@ -8,3 +8,5 @@ src/__generated__/
 
 .DS_Store
 *.log
+
+workers-site/
