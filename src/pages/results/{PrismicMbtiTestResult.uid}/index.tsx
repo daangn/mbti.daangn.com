@@ -88,7 +88,7 @@ const MBTITargetResultPage = ({
           {prismicMbtiIntro?.data?.cta_link?.url && (
             <ButtonWrapper>
               <KarrotLink id="visit-karrot" to={prismicMbtiIntro.data.cta_link.url}>
-                이웃 만나러 가기
+                {prismicMbtiIntro.data.cta_text || '이웃 만나러 가기'}
               </KarrotLink>
             </ButtonWrapper>
           )}
@@ -248,6 +248,7 @@ export const query = graphql`
       ...Layout_data
 
       data {
+        cta_text
         cta_link {
           url
         }
