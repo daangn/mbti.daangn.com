@@ -25,11 +25,18 @@
     }
   },
   "Result" : {
+    "cta_text" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "CTA Text",
+        "placeholder" : "CTA 링크 텍스트"
+      }
+    },
     "cta_link" : {
       "type" : "Link",
       "config" : {
         "label" : "CTA Link",
-        "placeholder" : "\"이웃 만나러 가기\" 링크",
+        "placeholder" : "CTA 링크 URL",
         "select" : null
       }
     }
